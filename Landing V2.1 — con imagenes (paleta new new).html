@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OXY46 — Landing V2.1 (con imágenes · paleta new new)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  @font-face{
+    font-family:'Miranda Sans';
+    src:url('Cowork/Miranda_Sans/MirandaSans-VariableFont_wght.ttf') format('truetype-variations'),
+        url('Cowork/Miranda_Sans/MirandaSans-VariableFont_wght.ttf') format('truetype');
+    font-weight:100 900;font-style:normal;font-display:swap;
+  }
+  @font-face{
+    font-family:'Miranda Sans';
+    src:url('Cowork/Miranda_Sans/MirandaSans-Italic-VariableFont_wght.ttf') format('truetype-variations'),
+        url('Cowork/Miranda_Sans/MirandaSans-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight:100 900;font-style:italic;font-display:swap;
+  }
+
+  :root{
+    /* PALETA NEW NEW */
+    --carbon:#17202B;
+    --navy:#1B2A40;
+    --navy-deep:#13203A;
+    --navy-soft:#3A4B66;
+    --cream:#F4F1EC;
+    --cream-deep:#ECE6DA;
+    --white:#FFFFFF;
+    --bg:#FAFAFA;
+    --ocre:#B89968;
+    --ocre-soft:#D9C39B;
+    --crimson:#B0152B;
+    --line:rgba(27,42,64,0.10);
+    --line-strong:rgba(27,42,64,0.22);
+    --line-cream:rgba(255,255,255,0.18);
+    --line-red:rgba(176,21,43,0.85);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--cream);color:var(--navy);font-family:'Miranda Sans','Inter',system-ui,sans-serif;font-weight:400;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 56px}
+  @media (max-width:780px){.wrap{padding:0 24px}}
+
+  .eyebrow{font-size:12px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:var(--crimson);display:inline-flex;align-items:center;gap:14px}
+  .eyebrow::before{content:"";width:28px;height:1px;background:var(--crimson)}
+  .eyebrow.cream{color:var(--ocre-soft)}
+  .eyebrow.cream::before{background:var(--ocre-soft)}
+  .eyebrow.navy{color:var(--navy-soft)}
+  .eyebrow.navy::before{background:var(--navy-soft)}
+
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--navy);color:var(--cream);padding:14px 22px;border-radius:999px;font-weight:500;font-size:15px;transition:.2s ease;border:1px solid var(--navy)}
+  .btn:hover{background:var(--navy-deep);border-color:var(--navy-deep)}
+  .btn.outline{background:transparent;color:var(--navy);border:1px solid var(--navy)}
+  .btn.outline.invert{color:var(--cream);border:1px solid var(--cream);background:transparent}
+  .btn.outline.invert:hover{background:var(--cream);color:var(--carbon)}
+  .btn.ocre{background:var(--ocre);color:var(--carbon);border-color:var(--ocre)}
+  .btn.ocre:hover{background:var(--ocre-soft);color:var(--carbon);border-color:var(--ocre-soft)}
+  .btn .arrow{display:inline-block;transform:translateY(-1px)}
+
+  em.gold, h1 em, h2 em, h3 em, h4 em{color:var(--ocre);font-style:italic;font-weight:500}
+  .on-navy em.gold, .on-navy h2 em, .on-navy h3 em{color:var(--ocre-soft)}
+  .on-carbon em.gold, .on-carbon h2 em, .on-carbon h3 em{color:var(--ocre-soft)}
+
+  /* Helper para fundir imagen con fondo cream — multiply + mask soft */
+  .blend-cream{
+    background:var(--cream);
+    overflow:hidden;
+  }
+  .blend-cream img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    mix-blend-mode:multiply;
+    -webkit-mask-image:radial-gradient(ellipse at center, #000 55%, transparent 100%);
+            mask-image:radial-gradient(ellipse at center, #000 55%, transparent 100%);
+  }
+
+  /* NAV */
+  nav.top{padding:22px 0;border-bottom:1px solid var(--line-red);background:var(--cream)}
+  nav.top .wrap{display:flex;align-items:center;justify-content:space-between}
+  nav.top .logo img{height:30px}
+  nav.top ul{display:flex;gap:32px;list-style:none;font-size:14px;letter-spacing:0.04em;color:var(--navy)}
+  nav.top ul a{opacity:.8}
+  nav.top ul a:hover{opacity:1;color:var(--navy-deep)}
+  nav.top .cta{font-size:13px;letter-spacing:0.14em;text-transform:uppercase;display:flex;align-items:center;gap:10px;color:var(--navy)}
+  nav.top .cta::after{content:"";width:7px;height:7px;background:var(--crimson);border-radius:999px;display:inline-block}
+
+  /* HERO con imagen horizontal como fondo */
+  .hero{
+    position:relative;
+    background:var(--cream);
+    overflow:hidden;
+    isolation:isolate;
+  }
+  /* La imagen va como capa de fondo, integrada al cream con multiply */
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:url('Cowork/Para%20Hero%20landing.png');
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center right;
+    mix-blend-mode:multiply;
+    /* Fundir suavemente con el cream en los bordes */
+    -webkit-mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,0.55) 12%, #000 30%, #000 100%);
+            mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,0.55) 12%, #000 30%, #000 100%);
+    z-index:0;
+    pointer-events:none;
+  }
+  /* Capa de cream traslúcido sobre la mitad izquierda para asegurar legibilidad del texto */
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to right, var(--cream) 0%, rgba(244,241,236,0.92) 28%, rgba(244,241,236,0.55) 45%, rgba(244,241,236,0) 65%);
+    z-index:1;
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative;z-index:2;padding-top:96px;padding-bottom:96px;min-height:640px}
+  .hero .content{max-width:740px}
+  .hero .eyebrow{margin-bottom:24px}
+  .hero h1{font-family:'STIX Two Text',serif;font-weight:500;font-size:clamp(36px,5.0vw,72px);line-height:1.04;letter-spacing:-0.022em;color:var(--navy)}
+  .hero h1 em{font-style:italic;font-weight:500;color:var(--ocre)}
+  .hero h1 .dot{color:var(--crimson)}
+  .hero .lede{margin-top:32px;max-width:560px;font-size:19px;line-height:1.55;color:var(--navy-soft)}
+  .hero .lede em{font-family:'STIX Two Text',serif;font-style:italic;color:var(--ocre);font-weight:500}
+  .hero .meta{margin-top:44px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  @media (max-width:1100px){
+    .hero::before{background-position:right -120px center}
+    .hero::after{background:linear-gradient(to right, var(--cream) 0%, rgba(244,241,236,0.95) 50%, rgba(244,241,236,0.55) 75%, rgba(244,241,236,0) 100%)}
+  }
+  @media (max-width:780px){
+    .hero::before{background-position:right -200px center;opacity:.6}
+    .hero::after{background:linear-gradient(to right, var(--cream) 0%, rgba(244,241,236,0.9) 100%)}
+    .hero .wrap{min-height:520px}
+  }
+
+  /* STATS */
+  .stats{padding:48px 0 80px;border-top:1px solid var(--line-red);border-bottom:1px solid var(--line);background:var(--cream-deep)}
+  .stats .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .stats .item{padding:36px 28px 36px 0;border-right:1px solid var(--line);position:relative}
+  .stats .item:last-child{border-right:none}
+  .stats .item::before{content:"";position:absolute;top:0;left:0;width:24px;height:1px;background:var(--crimson)}
+  .stats .num{font-family:'STIX Two Text',serif;font-weight:500;font-size:64px;line-height:1;letter-spacing:-0.02em;color:var(--navy)}
+  .stats .num sup{font-size:30px;color:var(--ocre);vertical-align:top;margin-left:4px;font-style:italic}
+  .stats .lbl{margin-top:14px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--navy-soft);max-width:230px}
+  @media (max-width:900px){.stats .grid{grid-template-columns:1fr 1fr}.stats .item:nth-child(2){border-right:none}.stats .item{border-bottom:1px solid var(--line);padding:24px 0}}
+
+  /* CLIENTES */
+  .clients{padding:80px 0;background:var(--cream)}
+  .clients .head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:42px;gap:48px;flex-wrap:wrap}
+  .clients h3{font-family:'Miranda Sans',sans-serif;font-weight:500;font-size:14px;letter-spacing:0.22em;text-transform:uppercase;color:var(--navy-soft)}
+  .clients .meta{font-family:'STIX Two Text',serif;font-style:italic;color:var(--ocre);font-size:18px;font-weight:500}
+  .clients .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border-top:1px solid var(--line-red);align-items:center}
+  .clients .grid .cell{padding:28px 18px;border-right:1px solid var(--line);display:flex;align-items:center;justify-content:center;min-height:96px}
+  .clients .grid .cell:last-child{border-right:none}
+  .clients .grid .cell img{max-height:42px;max-width:100%;width:auto;opacity:.85;filter:grayscale(100%) brightness(0.4);mix-blend-mode:multiply;transition:opacity .2s ease}
+  .clients .grid .cell:hover img{opacity:1}
+  @media (max-width:900px){.clients .grid{grid-template-columns:repeat(3,1fr)}.clients .grid .cell:nth-child(3){border-right:none}.clients .grid .cell{border-bottom:1px solid var(--line)}}
+
+  /* MANIFIESTO */
+  .manifest{padding:120px 0 100px}
+  .manifest .head{display:flex;justify-content:space-between;align-items:flex-end;gap:48px;margin-bottom:48px}
+  .manifest h2{font-family:'STIX Two Text',serif;font-weight:500;font-size:clamp(34px,4.8vw,64px);line-height:1.05;letter-spacing:-0.02em;max-width:760px;color:var(--navy)}
+  .manifest h2 em{font-style:italic;font-weight:500;color:var(--ocre)}
+  .manifest .lede{font-size:18px;line-height:1.55;max-width:380px;color:var(--navy-soft)}
+  .manifest .lede em{font-family:'STIX Two Text',serif;font-style:italic;color:var(--ocre);font-weight:500}
+  .manifest .quote{margin-top:64px;padding:36px 0 36px 28px;border-left:2px solid var(--crimson);font-family:'STIX Two Text',serif;font-style:italic;font-weight:500;font-size:30px;line-height:1.32;letter-spacing:-0.01em;max-width:880px;color:var(--ocre)}
+  .manifest .quote .by{display:block;margin-top:18px;font-family:'Miranda Sans',sans-serif;font-style:normal;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--navy-soft)}
+
+  /* SERVICIOS (navy) */
+  .services{padding:120px 0;background:var(--navy);color:var(--cream);position:relative}
+  .services::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--line-red)}
+  .services .head{display:flex;justify-content:space-between;align-items:flex-end;gap:48px;margin-bottom:56px}
+  .services h2{font-family:'STIX Two Text',serif;font-weight:500;font-size:clamp(34px,4.8vw,64px);line-height:1.05;letter-spacing:-0.02em;max-width:760px;color:var(--cream)}
+  .services h2 em{color:var(--ocre-soft);font-style:italic;font-weight:500}
+  .services .lede{font-size:18px;line-height:1.55;max-width:380px;opacity:.85}
+  .services .lede em{font-family:'STIX Two Text',serif;font-style:italic;color:var(--ocre-soft);font-weight:500}
+  .services .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line-cream)}
+  .services .card{padding:40px 32px 48px 0;border-right:1px solid var(--line-cream);position:relative}
+  .services .card:last-child{border-right:none;padding-right:0}
+  .services .card::before{content:"";position:absolute;top:-1px;left:0;width:36px;height:1px;background:var(--crimson)}
+  .services .card .num{font-family:'STIX Two Text',serif;font-weight:500;font-style:italic;font-size:18px;color:var(--ocre-soft);letter-spacing:0.02em;margin-bottom:10px;display:block}
+  .services .card h3{font-family:'STIX Two Text',serif;font-weight:500;font-size:38px;line-height:1.05;letter-spacing:-0.015em;margin-bottom:14px;color:var(--cream)}
+  .services .card h3 em{color:var(--ocre-soft)}
+  .services .card .desc{color:rgba(244,241,236,0.78);font-size:16px;line-height:1.55;margin-bottom:22px}
+  .services .card ul{list-style:none;padding:0;font-size:14.5px;color:var(--cream)}
+  .services .card ul li{padding:11px 0;border-top:1px solid var(--line-cream);display:flex;gap:12px;align-items:baseline}
+  .services .card ul li::before{content:"";width:14px;height:1px;background:var(--crimson);margin-top:11px;flex-shrink:0}
+  @media (max-width:900px){.services .grid{grid-template-columns:1fr}.services .card{border-right:none;border-bottom:1px solid var(--line-cream);padding-right:0}}
+
+  /* TESTIMONIOS */
+  .testimonials{padding:120px 0;background:var(--cream-deep);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .testimonials .head{display:flex;justify-content:space-between;align-items:flex-end;gap:48px;margin-bottom:48px}
+  .testimonials h2{font-family:'STIX Two Text',serif;font-weight:500;font-size:clamp(34px,4.8vw,60px);line-height:1.05;letter-spacing:-0.02em;max-width:720px;color:var(--navy)}
+  .testimonials h2 em{font-style:italic;font-weight:500;color:var(--ocre)}
+  .testimonials .lede{font-size:18px;color:var(--navy-soft);max-width:380px}
+  .testimonials .lede em{font-family:'STIX Two Text',serif;font-style:italic;color:var(--ocre);font-weight:500}
+  .testimonials .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:24px}
+  .testimonials .card{padding:36px 28px;background:var(--cream);border:1px solid var(--line);position:relative;display:flex;flex-direction:column}
+  .testimonials .card::before{content:"";position:absolute;top:-1px;left:0;width:48px;height:2px;background:var(--crimson)}
+  .testimonials .card .open{font-family:'STIX Two Text',serif;font-style:italic;font-size:64px;line-height:0.5;color:var(--crimson);height:22px;margin-bottom:8px}
+  .testimonials .card .text{font-family:'STIX Two Text',serif;font-weight:500;font-size:19px;line-height:1.42;letter-spacing:-0.005em;color:var(--navy);margin-bottom:24px;flex:1}
+  .testimonials .card .text em{font-style:italic;color:var(--ocre);font-weight:500}
+  .testimonials .card .author{padding-top:18px;border-top:1px solid var(--line);display:flex;align-items:center;gap:14px}
+  .testimonials .card .author .avatar{width:42px;height:42px;border-radius:999px;background:var(--navy);color:var(--cream);display:flex;align-items:center;justify-content:center;font-family:'STIX Two Text',serif;font-style:italic;font-weight:500;font-size:16px;letter-spacing:0.02em;flex-shrink:0}
+  .testimonials .card .author .nm{font-family:'Miranda Sans',sans-serif;font-weight:700;font-size:14.5px;color:var(--navy);line-height:1.2}
+  .testimonials .card .author .role{font-size:12px;color:var(--navy-soft);margin-top:3px;line-height:1.3}
+  .testimonials .card .author .role em{font-family:'STIX Two Text',serif;font-style:italic;color:var(--ocre);font-weight:500}
+  @media (max-width:900px){.testimonials .grid{grid-template-columns:1fr}}
+
+  /* APPROACH — directorio + montañas full bleed */
+  .approach{padding:0;background:var(--cream)}
+  .approach .imgbleed{width:100%;aspect-ratio:21/9;background:var(--cream);overflow:hidden;position:relative}
+  .approach .imgbleed img{
+    width:100%;height:100%;object-fit:cover;object-position:center;
+    mix-blend-mode:multiply;
+    -webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
+            mask-image:linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  }
+  .approach .text{padding:48px 0 110px}
+  .approach .head{display:flex;justify-content:space-between;align-items:flex-end;gap:48px}
+  .approach h2{font-family:'STIX Two Text',serif;font-weight:500;font-size:clamp(28px,3.6vw,48px);line-height:1.08;letter-spacing:-0.018em;max-width:720px;color:var(--navy)}
+  .approach h2 em{font-style:italic;font-weight:500;color:var(--ocre)}
+  .approach .lede{font-size:18px;line-height:1.55;max-width:420px;color:var(--navy-soft)}
+  .approach .lede em{font-family:'STIX Two Text',serif;font-style:italic;color:var(--ocre);font-weight:500}
+
+  /* DIFFER con iconos */
+  .differ{padding:120px 0;background:var(--cream-deep);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .differ .head{display:flex;justify-content:space-between;align-items:flex-end;gap:48px;margin-bottom:48px}
+  .differ h2{font-family:'STIX Two Text',serif;font-weight:500;font-size:clamp(34px,4.8vw,64px);line-height:1.05;letter-spacing:-0.02em;max-width:720px;color:var(--navy)}
+  .differ h2 em{font-style:italic;font-weight:500;color:var(--ocre)}
+  .differ .lede{font-size:18px;color:var(--navy-soft);max-width:380px}
+  .differ .lede em{font-family:'STIX Two Text',serif;font-style:italic;color:var(--ocre);font-weight:500}
+  .differ .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--line-red)}
+  .differ .pill{padding:36px 22px 32px 0;border-right:1px solid var(--line);position:relative}
+  .differ .pill:last-child{border-right:none}
+  .differ .pill .nm{font-family:'STIX Two Text',serif;font-style:italic;font-weight:500;color:var(--crimson);font-size:14px;margin-bottom:18px;display:block;letter-spacing:0.02em}
+  .differ .pill .ico{height:64px;width:64px;margin-bottom:24px;display:flex;align-items:center;justify-content:flex-start}
+  .differ .pill .ico img{max-height:64px;max-width:64px;width:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(38%) saturate(1400%) hue-rotate(192deg) brightness(96%) contrast(96%);}
+  .differ .pill h4{font-family:'Miranda Sans',sans-serif;font-weight:700;font-size:19px;letter-spacing:-0.01em;margin-bottom:10px;color:var(--navy)}
+  .differ .pill p{color:var(--navy-soft);font-size:14.5px;line-height:1.55}
+  @media (max-width:900px){.differ .grid{grid-template-columns:1fr 1fr}.differ .pill:nth-child(2n){border-right:none}.differ .pill{border-bottom:1px solid var(--line);padding-right:0}}
+
+  /* CTA FINAL — CARBÓN + imagen Diagnóstico fundida */
+  .ctablock{padding:0;background:var(--carbon);color:var(--cream);position:relative}
+  .ctablock::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--line-red);z-index:2}
+  .ctablock .grid{display:grid;grid-template-columns:1.05fr 1fr;gap:0;align-items:stretch}
+  .ctablock .text{padding:120px 56px 120px 0;background:var(--carbon)}
+  .ctablock .text .inner{max-width:620px;margin-left:auto}
+  .ctablock h2{font-family:'STIX Two Text',serif;font-weight:500;font-size:clamp(28px,3.6vw,50px);line-height:1.08;letter-spacing:-0.018em;color:var(--cream)}
+  .ctablock h2 em{font-style:italic;font-weight:500;color:var(--ocre-soft)}
+  .ctablock .row{margin-top:36px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .ctablock .note{font-size:14px;color:rgba(244,241,236,0.7);margin-top:18px;max-width:480px}
+  .ctablock .note em{font-family:'STIX Two Text',serif;font-style:italic;color:var(--ocre-soft);font-weight:500}
+  .ctablock .btn{background:var(--ocre);color:var(--carbon);border-color:var(--ocre)}
+  .ctablock .btn:hover{background:var(--ocre-soft);color:var(--carbon);border-color:var(--ocre-soft)}
+  .ctablock .img{background:var(--carbon);overflow:hidden;position:relative}
+  .ctablock .img img{
+    width:100%;height:100%;object-fit:cover;object-position:center;
+    mix-blend-mode:screen;
+    filter:contrast(1.05) brightness(0.95);
+    -webkit-mask-image:radial-gradient(ellipse 90% 80% at center, #000 50%, rgba(0,0,0,0.6) 75%, transparent 100%);
+            mask-image:radial-gradient(ellipse 90% 80% at center, #000 50%, rgba(0,0,0,0.6) 75%, transparent 100%);
+  }
+  @media (max-width:900px){.ctablock .grid{grid-template-columns:1fr}.ctablock .text{padding:80px 24px}.ctablock .img{aspect-ratio:5/4}}
+
+  /* FOOTER */
+  footer{background:var(--carbon);color:var(--cream);padding:48px 0 32px;position:relative;border-top:1px solid var(--line-cream)}
+  footer .grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}
+  footer .logo img{height:36px;filter:invert(1)}
+  footer .legend{margin-top:18px;font-size:14px;opacity:.7;max-width:340px;line-height:1.55}
+  footer .legend em{font-family:'STIX Two Text',serif;font-style:italic;color:var(--ocre-soft);font-weight:500}
+  footer h5{font-size:12px;letter-spacing:0.18em;text-transform:uppercase;opacity:.6;margin-bottom:16px;font-weight:500}
+  footer ul{list-style:none}
+  footer li{font-size:14.5px;padding:6px 0;opacity:.9}
+  footer .bottom{margin-top:64px;padding-top:24px;border-top:1px solid var(--line-cream);display:flex;justify-content:space-between;align-items:center;font-size:12px;opacity:.6;letter-spacing:0.06em;text-transform:uppercase}
+  @media (max-width:900px){footer .grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <a href="#" class="logo"><img src="Cowork/Logo%20OXY%20negro.png" alt="OXY46"></a>
+    <ul>
+      <li><a href="#">Servicios</a></li>
+      <li><a href="#">Enfoque</a></li>
+      <li><a href="#">Casos</a></li>
+      <li><a href="#">Academia</a></li>
+      <li><a href="#">Insights</a></li>
+    </ul>
+    <a class="cta" href="#">Agendar diagnóstico</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="content">
+      <div class="eyebrow">Adopción de inteligencia artificial</div>
+      <h1 style="margin-top:18px">Ayudamos a empresas<br>y profesionales a<br><em>implementar</em> inteligencia<br>artificial<span class="dot">.</span></h1>
+      <p class="lede">Identificamos oportunidades, formamos a tu equipo y construimos los sistemas para que la IA <em>funcione, de verdad,</em> en tu negocio.</p>
+      <div class="meta">
+        <a class="btn" href="#">Diagnóstico en 3 minutos <span class="arrow">→</span></a>
+        <a class="btn outline" href="#">Cómo trabajamos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="grid">
+      <div class="item">
+        <div class="num">80<sup>k+</sup></div>
+        <div class="lbl">Seguidores y lectores activos</div>
+      </div>
+      <div class="item">
+        <div class="num">3.000<sup>+</sup></div>
+        <div class="lbl">Profesionales capacitados</div>
+      </div>
+      <div class="item">
+        <div class="num">12</div>
+        <div class="lbl">Países con clientes activos</div>
+      </div>
+      <div class="item">
+        <div class="num">4,3<span style="font-size:30px;color:var(--ocre);font-style:italic;font-family:'STIX Two Text',serif">/5</span></div>
+        <div class="lbl">246 reviews · satisfacción</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="clients">
+  <div class="wrap">
+    <div class="head">
+      <h3>Algunos de nuestros clientes</h3>
+      <span class="meta">Confían en OXY46 para implementar IA en su negocio.</span>
+    </div>
+    <div class="grid">
+      <div class="cell"><img src="Cowork/LOGOS/Logos%20negros%20en%20PNG-01.png" alt="Telecom"></div>
+      <div class="cell"><img src="Cowork/LOGOS/Logos%20negros%20en%20PNG-02.png" alt="Bolsa de Comercio de Rosario"></div>
+      <div class="cell"><img src="Cowork/LOGOS/Logos%20negros%20en%20PNG-03.png" alt="Grupo Atlántida"></div>
+      <div class="cell"><img src="Cowork/LOGOS/Logos%20negros%20en%20PNG-04.png" alt="Rosental Inversiones"></div>
+      <div class="cell"><img src="Cowork/LOGOS/Logos%20negros%20en%20PNG-05.png" alt="NINCH"></div>
+      <div class="cell"><img src="Cowork/LOGOS/Logo%20negro%2006.png" alt="La Mutual de AMR"></div>
+    </div>
+  </div>
+</section>
+
+<section class="manifest">
+  <div class="wrap">
+    <div class="head">
+      <h2>La mayoría ya usa IA.<br><em>Pocas empresas la integraron de verdad.</em></h2>
+      <p class="lede">Trabajamos con líderes que buscan resultados: menos tiempo perdido, mejores decisiones y procesos que escalan. No enseñamos herramientas. <em>Transformamos cómo opera tu empresa.</em></p>
+    </div>
+    <div class="quote">
+      “El problema ahora no es acceder a la IA. Es saber qué hacer con ella.”
+      <span class="by">— Punto de partida del método OXY46</span>
+    </div>
+  </div>
+</section>
+
+<section class="services on-navy">
+  <div class="wrap">
+    <div class="head">
+      <h2><span class="eyebrow cream">Lo que hacemos</span><br><span style="display:block;margin-top:14px">Tres servicios.<br><em>Un solo objetivo.</em></span></h2>
+      <p class="lede">Acompañamos a las empresas en cada etapa de la implementación de IA: <em>desde definir la estrategia hasta construir los sistemas que la hacen funcionar.</em></p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <span class="num">01 / Estrategia</span>
+        <h3>Identificar dónde aplicar IA con <em>impacto real.</em></h3>
+        <p class="desc">Diagnóstico de situación, mapeo de oportunidades y hoja de ruta accionable para directorios y alta dirección.</p>
+        <ul>
+          <li>Plan estratégico de IA</li>
+          <li>Casos de uso por área</li>
+          <li>Workshop ejecutivo para directorios</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="num">02 / Educación</span>
+        <h3>Formar al equipo para trabajar con IA <em>cada día.</em></h3>
+        <p class="desc">Cursos online, ejercicios prácticos y certificaciones, con actualizaciones permanentes y enfoque por industria.</p>
+        <ul>
+          <li>Academia de IA</li>
+          <li>Workshops para líderes</li>
+          <li>Recursos y certificaciones</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="num">03 / Desarrollos</span>
+        <h3>Construir sistemas y agentes para la <em>operación real.</em></h3>
+        <p class="desc">Soluciones a medida: del chat de atención al back office automatizado, hasta dashboards inteligentes y agentes operativos.</p>
+        <ul>
+          <li>Chats y agentes de atención</li>
+          <li>Procesamiento de back office</li>
+          <li>Dashboards y soluciones a medida</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="wrap">
+    <div class="head">
+      <h2><span class="eyebrow">Voces de clientes</span><br><span style="display:block;margin-top:14px">Lo que dicen los que ya <em>integraron IA</em>.</span></h2>
+      <p class="lede">Tres equipos que dejaron de "probar" y empezaron a operar con IA. <em>Mismo método. Resultados distintos.</em></p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="open">“</div>
+        <p class="text">Entraron, entendieron el negocio antes de hablar de herramientas, y en seis semanas teníamos al equipo operando con IA en serio. <em>Sin humo, con criterio.</em></p>
+        <div class="author">
+          <div class="avatar">LM</div>
+          <div>
+            <div class="nm">Laura Martínez</div>
+            <div class="role">Directora de Operaciones · <em>Telecom</em></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="open">“</div>
+        <p class="text">Nos ayudaron a pasar de pruebas piloto aisladas a un plan que el directorio entendió y aprobó. <em>La IA dejó de ser un proyecto del área tecnológica.</em></p>
+        <div class="author">
+          <div class="avatar">FR</div>
+          <div>
+            <div class="nm">Federico Rosental</div>
+            <div class="role">CIO · <em>Bolsa de Comercio de Rosario</em></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="open">“</div>
+        <p class="text">Lo más valioso no fue la tecnología — fue el criterio. Aprendimos a decidir qué automatizar, qué dejar en manos humanas y cómo medir el impacto. <em>Eso no se compra.</em></p>
+        <div class="author">
+          <div class="avatar">CB</div>
+          <div>
+            <div class="nm">Carolina Benítez</div>
+            <div class="role">Gerenta de Innovación · <em>Grupo Atlántida</em></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="approach">
+  <div class="imgbleed">
+    <img src="Cowork/Ejemplos%20styling%20premium/ChatGPT%20Image%2012%20may%202026%2C%2022_58_58.png" alt="Sala de directorio">
+  </div>
+  <div class="text">
+    <div class="wrap">
+      <div class="head">
+        <h2>Pensamos como un<br>directorio.<em> Operamos como<br>un equipo de producto.</em></h2>
+        <p class="lede">Llegamos a la mesa de decisión con foco estratégico, salimos con un plan que se puede ejecutar la semana siguiente. <em>Sin powerpoints inertes.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="differ">
+  <div class="wrap">
+    <div class="head">
+      <h2><span class="eyebrow">Cómo trabajamos</span><br><span style="display:block;margin-top:14px">Lo que nos <em>diferencia</em>.</span></h2>
+      <p class="lede">Un equipo que combina estrategia, formación y desarrollo. La IA <em>potencia a las personas.</em> Nunca las ignora.</p>
+    </div>
+    <div class="grid">
+      <div class="pill">
+        <span class="nm">01</span>
+        <div class="ico"><img src="Cowork/icono_01_contexto.png" alt=""></div>
+        <h4>Contexto primero</h4>
+        <p>Entendemos tu negocio antes de proponer cualquier solución.</p>
+      </div>
+      <div class="pill">
+        <span class="nm">02</span>
+        <div class="ico"><img src="Cowork/icono_02_impacto.png" alt=""></div>
+        <h4>Impacto medible</h4>
+        <p>Cada proyecto tiene métricas claras desde el día uno.</p>
+      </div>
+      <div class="pill">
+        <span class="nm">03</span>
+        <div class="ico"><img src="Cowork/icono_03_rapidez.png" alt=""></div>
+        <h4>Rapidez real</h4>
+        <p>Implementamos con iteraciones cortas y resultados visibles.</p>
+      </div>
+      <div class="pill">
+        <span class="nm">04</span>
+        <div class="ico"><img src="Cowork/icono_04_equipo.png" alt=""></div>
+        <h4>Equipo como centro</h4>
+        <p>La IA potencia a las personas. Nunca las reemplaza por defecto.</p>
+      </div>
+      <div class="pill">
+        <span class="nm">05</span>
+        <div class="ico"><img src="Cowork/icono_05_escalable.png" alt=""></div>
+        <h4>Escalable</h4>
+        <p>Los sistemas que construimos crecen con tu negocio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ctablock on-carbon">
+  <div class="grid">
+    <div class="text">
+      <div class="inner">
+        <span class="eyebrow cream">·  Diagnóstico inicial sin costo</span>
+        <h2 style="margin-top:18px">Te mostramos cómo<br>implementar IA en tu empresa,<br><em>con un diagnóstico inicial<br>sin costo ni compromiso.</em></h2>
+        <div class="row">
+          <a class="btn" href="#">Comenzar la transformación <span class="arrow">→</span></a>
+          <a class="btn outline invert" href="#">Conversar con el equipo</a>
+        </div>
+        <p class="note">Un agente de IA analiza tu empresa y te muestra, en minutos, dónde puede haber <em>resultados concretos.</em></p>
+      </div>
+    </div>
+    <div class="img">
+      <img src="Cowork/Diagnostico.png" alt="">
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="logo"><img src="Cowork/Logo%20OXY%20negro.png" alt="OXY46"></div>
+        <p class="legend">Adopción de inteligencia artificial. <em>Estrategia, educación y desarrollos.</em> Trabajamos con organizaciones en 12 países.</p>
+      </div>
+      <div>
+        <h5>Servicios</h5>
+        <ul>
+          <li>Estrategia</li>
+          <li>Educación</li>
+          <li>Desarrollos</li>
+          <li>Academia de IA</li>
+        </ul>
+      </div>
+      <div>
+        <h5>Empresa</h5>
+        <ul>
+          <li>Sobre OXY46</li>
+          <li>Equipo</li>
+          <li>Casos</li>
+          <li>Insights</li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul>
+          <li>ia@oxy46.com</li>
+          <li>Instagram</li>
+          <li>LinkedIn</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 OXY46 · Adopción de IA</span>
+      <span>CH · AR · IT</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
